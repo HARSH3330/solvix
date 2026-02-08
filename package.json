@@ -30,7 +30,5 @@
     "node": ">=14.0.0"
   },
   "devDependencies": {},
-  "dependencies": {
-    "note": "This is a static website with no npm dependencies. Google Analytics and EmailJS are loaded via CDN."
-  }
+  "dependencies": {}
 }
