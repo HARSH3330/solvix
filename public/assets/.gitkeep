@@ -1,0 +1,12 @@
+# Assets directory for future images and media files
+# 
+# Usage:
+#   - Place images, videos, and media files in this directory
+#   - Reference them in HTML: <img src="public/assets/image.png" alt="...">
+#   - This directory is tracked by git to preserve structure
+#
+# Example structure:
+#   public/assets/images/
+#   public/assets/videos/
+#   public/assets/icons/
+#   public/assets/fonts/

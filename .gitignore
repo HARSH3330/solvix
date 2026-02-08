@@ -1,15 +1,57 @@
+# =====================================================
+# GIT IGNORE - SOLVIX WEBSITE
+# =====================================================
+
 # Dependencies
 node_modules/
+package-lock.json
+yarn.lock
 
-# OS files
+# Environment Variables (local development only)
+.env
+.env.local
+.env.*.local
+
+# OS Files
 .DS_Store
 Thumbs.db
+.windows-build-tools
+.node-gyp
 
-# Editor files
+# IDE/Editor Files
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+*.iml
+
+# Build/Compilation
+dist/
+build/
+*.tsbuildinfo
 
 # Logs
 *.log
+*.logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary/Cache Files
+.cache/
+.next/
+.nuxt/
+coverage/
+*.tmp
+
+# System Files
+.AppleDouble
+.LSOverride
+._*
+
+# Deployment
+.netlify/
+.vercel/

@@ -1,0 +1,36 @@
+{
+  "name": "solvix-website",
+  "version": "1.0.0",
+  "description": "Professional corporate website for Solvix Business Solutions - end-to-end business support firm",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "serve": "npx serve -p 8000"
+  },
+  "keywords": [
+    "business solutions",
+    "HR services",
+    "accounting",
+    "finance",
+    "counseling",
+    "sales support",
+    "marketing",
+    "web development",
+    "corporate website",
+    "static site"
+  ],
+  "author": "Solvix Business Solutions",
+  "license": "Proprietary",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-USERNAME/solvix-website.git"
+  },
+  "homepage": "https://wesolvix.in",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "note": "This is a static website with no npm dependencies. Google Analytics and EmailJS are loaded via CDN."
+  }
+}

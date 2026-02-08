@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+  <!-- EmailJS SDK for form submissions -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G_XXXXXXXXXXXXX"></script>
+  
 </head>
 <body>
   
@@ -152,7 +158,7 @@
       <p class="section-subtitle scroll-animate">Take the first step toward your career at Solvix</p>
       
       <div class="scroll-animate" style="max-width: 700px; margin: 0 auto; background-color: white; padding: var(--spacing-10); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl);">
-        <form data-validate-form>
+        <form data-validate-form data-form-type="career">
           <div class="form-group">
             <label for="name" class="form-label">Full Name *</label>
             <input type="text" id="name" name="name" class="form-input" data-validate="required" required>
@@ -197,21 +203,18 @@
           </div>
           
           <div class="form-group">
-            <label for="resume" class="form-label">Upload Resume (PDF, DOC, DOCX) *</label>
-            <div class="form-file-upload">
-              <input type="file" id="resume" name="resume" class="form-file-input" accept=".pdf,.doc,.docx" required>
-              <label for="resume" class="form-file-label">
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                </svg>
-                <span>Click to upload resume</span>
-              </label>
+            <label for="resume" class="form-label">Resume Link *</label>
+            <input type="url" id="resume" name="resume" class="form-input" 
+                   placeholder="Share a public link to your resume (Google Drive, Dropbox, OneDrive, etc.)" 
+                   data-validate="required" required>
+            <div style="background-color: #fff3cd; border: 1px solid #ffc107; padding: var(--spacing-3); border-radius: var(--radius-md); margin-top: var(--spacing-2); font-size: var(--font-size-sm); color: #856404;">
+              <strong>⚠️ Important:</strong> Make sure the link is publicly accessible. Anyone with the link should be able to view your resume. You can use Google Drive, Dropbox, OneDrive, or any cloud storage service.
             </div>
           </div>
           
           <div class="form-group">
-            <label for="cover-letter" class="form-label">Cover Letter (Optional)</label>
-            <textarea id="cover-letter" name="cover-letter" class="form-textarea" rows="6" placeholder="Tell us why you'd be a great fit for Solvix..."></textarea>
+            <label for="message" class="form-label">Cover Letter (Optional)</label>
+            <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="Tell us why you'd be a great fit for Solvix..."></textarea>
           </div>
           
           <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Submit Application</button>
@@ -249,7 +252,7 @@
         <div class="footer-section">
           <h4>Contact</h4>
           <ul class="footer-links">
-            <li>📧 info@solvix.com</li>
+            <li>📧 info@wesolvix.in</li>
             <li>📞 +91 123 456 7890</li>
             <li>📍 Agra & Delhi NCR</li>
             <li><a href="contact.html">Contact Form</a></li>
@@ -264,6 +267,7 @@
   
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
+  <script src="config/analytics-config.js"></script>
   <script src="js/forms.js"></script>
 </body>
 </html>

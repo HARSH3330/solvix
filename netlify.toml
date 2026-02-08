@@ -1,0 +1,77 @@
+# =====================================================
+# NETLIFY CONFIGURATION
+# =====================================================
+# This file configures deployment and routing for Netlify
+
+[build]
+  # No build step needed - static site
+  publish = "/"
+  command = ""
+
+# =====================================================
+# REDIRECTS & ROUTING
+# =====================================================
+
+# SPA fallback - redirect all non-file requests to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# =====================================================
+# HEADERS
+# =====================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Enable gzip compression
+    Content-Encoding = "gzip"
+
+# =====================================================
+# CACHE CONTROL
+# =====================================================
+
+# Cache HTML (short term - 1 hour)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Cache CSS, JS, images (long term - 1 year)
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/public/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# =====================================================
+# ENVIRONMENT VARIABLES
+# =====================================================
+# Note: Set these in Netlify dashboard > Site settings > Build & deploy > Environment
+
+# [context.production]
+#   environment = { GA_MEASUREMENT_ID = "YOUR_GA_ID", EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID", EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID", EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY" }
+
+# =====================================================
+# ANALYTICS & MONITORING
+# =====================================================
+
+# Enable Netlify Analytics (optional)
+# [analytics]
+#   enabled = true

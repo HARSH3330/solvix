@@ -1,86 +1,61 @@
 // ===================================
-// SOLVIX CORPORATE WEBSITE
 // Animations & Scroll Effects
 // ===================================
 
-// === SCROLL ANIMATIONS ===
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const animateOnScroll = new IntersectionObserver((entries) => {
+// === SCROLL-TRIGGERED ANIMATIONS ===
+const scrollAnimObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('active');
-      // Optionally unobserve after animation
-      // animateOnScroll.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+});
 
-// Observe all elements with scroll-animate class
 document.addEventListener('DOMContentLoaded', () => {
-  const animatedElements = document.querySelectorAll('.scroll-animate');
-  animatedElements.forEach(el => animateOnScroll.observe(el));
+  document.querySelectorAll('.scroll-animate').forEach(el => {
+    scrollAnimObserver.observe(el);
+  });
 });
 
 // === ANIMATED COUNTERS ===
 function animateCounter(element, target, duration = 2000) {
-  const start = 0;
-  const increment = target / (duration / 16); // 60fps
-  let current = start;
+  const increment = target / (duration / 16);
+  let current = 0;
   
   const timer = setInterval(() => {
     current += increment;
+    element.textContent = current >= target ? target : Math.floor(current);
+    
     if (current >= target) {
-      element.textContent = target;
       clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(current);
     }
   }, 16);
 }
 
-// Trigger counters when they come into view
+// Observe and animate counters
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.animated) {
-      const target = parseInt(entry.target.dataset.target);
-      const duration = parseInt(entry.target.dataset.duration) || 2000;
-      animateCounter(entry.target, target, duration);
-      entry.target.dataset.animated = 'true';
-      counterObserver.unobserve(entry.target);
-    }
+    if (!entry.isIntersecting || entry.target.dataset.animated) return;
+    
+    const target = parseInt(entry.target.dataset.target);
+    const duration = parseInt(entry.target.dataset.duration) || 2000;
+    
+    animateCounter(entry.target, target, duration);
+    entry.target.dataset.animated = 'true';
+    counterObserver.unobserve(entry.target);
   });
 }, { threshold: 0.5 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const counters = document.querySelectorAll('.counter');
-  counters.forEach(counter => counterObserver.observe(counter));
+  document.querySelectorAll('.counter').forEach(counter => {
+    counterObserver.observe(counter);
+  });
 });
 
-// === PARALLAX EFFECT (Optional) ===
-function parallaxEffect() {
-  const parallaxElements = document.querySelectorAll('[data-parallax]');
-  
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    
-    parallaxElements.forEach(element => {
-      const speed = element.dataset.parallax || 0.5;
-      const yPos = -(scrolled * speed);
-      element.style.transform = `translateY(${yPos}px)`;
-    });
-  });
-}
-
-// Initialize parallax if elements exist
-if (document.querySelector('[data-parallax]')) {
-  parallaxEffect();
-}
-
-// === STAGGER ANIMATION ===
+// === STAGGERED ANIMATIONS ===
 function staggerAnimation(elements, delay = 100) {
   elements.forEach((element, index) => {
     setTimeout(() => {
@@ -89,40 +64,54 @@ function staggerAnimation(elements, delay = 100) {
   });
 }
 
-// Apply stagger to card grids
-const cardGridObserver = new IntersectionObserver((entries) => {
+// Observe grid animations
+const gridAnimObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.staggered) {
-      const cards = entry.target.querySelectorAll('.card, .service-card');
+    if (!entry.isIntersecting || entry.target.dataset.staggered) return;
+    
+    const cards = entry.target.querySelectorAll('.card, .service-card');
+    if (cards.length > 0) {
       staggerAnimation(cards, 150);
       entry.target.dataset.staggered = 'true';
-      cardGridObserver.unobserve(entry.target);
+      gridAnimObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const grids = document.querySelectorAll('.feature-grid, .grid');
-  grids.forEach(grid => {
-    if (grid.querySelectorAll('.card, .service-card').length > 0) {
-      cardGridObserver.observe(grid);
-    }
+  document.querySelectorAll('.feature-grid, .grid').forEach(grid => {
+    gridAnimObserver.observe(grid);
   });
 });
 
-// === HOVER TILT EFFECT (Subtle) ===
+// === PARALLAX EFFECT ===
+function initializeParallax() {
+  const parallaxElements = document.querySelectorAll('[data-parallax]');
+  if (parallaxElements.length === 0) return;
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    parallaxElements.forEach(element => {
+      const speed = parseFloat(element.dataset.parallax) || 0.5;
+      element.style.transform = `translateY(${-(scrolled * speed)}px)`;
+    });
+  });
+}
+
+if (document.querySelector('[data-parallax]')) {
+  initializeParallax();
+}
+
+// === HOVER TILT EFFECT ===
 function addTiltEffect(cards) {
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
+      const rotateX = (e.clientY - rect.top - centerY) / 20;
+      const rotateY = (centerX - (e.clientX - rect.left)) / 20;
       
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
@@ -133,50 +122,42 @@ function addTiltEffect(cards) {
   });
 }
 
-// Apply tilt to cards (optional, can be enabled/disabled)
-// document.addEventListener('DOMContentLoaded', () => {
-//   const tiltCards = document.querySelectorAll('.card');
-//   addTiltEffect(tiltCards);
-// });
-
-// === FADE IN ON LOAD ===
+// === PAGE LOAD FADE-IN ===
 window.addEventListener('load', () => {
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.3s ease-in';
+  const body = document.body;
+  body.style.opacity = '0';
+  body.style.transition = 'opacity 0.3s ease-in';
   
   setTimeout(() => {
-    document.body.style.opacity = '1';
+    body.style.opacity = '1';
   }, 100);
 });
 
-// === SCROLL PROGRESS INDICATOR (Optional) ===
+// === SCROLL PROGRESS BAR (Optional) ===
 function createScrollProgress() {
   const progressBar = document.createElement('div');
   progressBar.className = 'scroll-progress';
   progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
+    position: fixed; top: 0; left: 0; height: 3px;
     background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-    z-index: 9999;
-    transition: width 0.1s ease-out;
+    z-index: 9999; transition: width 0.1s ease-out;
   `;
   document.body.appendChild(progressBar);
   
   window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.pageYOffset / windowHeight) * 100;
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.pageYOffset / totalHeight) * 100;
     progressBar.style.width = scrolled + '%';
   });
 }
 
-// Uncomment to enable scroll progress indicator
+// Uncomment to enable:
 // createScrollProgress();
 
-// === EXPORT FUNCTIONS FOR EXTERNAL USE ===
+// === PUBLIC API ===
 window.SolvixAnimations = {
   animateCounter,
   staggerAnimation,
-  addTiltEffect
+  addTiltEffect,
+  createScrollProgress
 };
