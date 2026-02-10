@@ -83,11 +83,27 @@ function trackButtonClick(buttonName) {
 
 // === ERROR TRACKING ===
 window.addEventListener('error', (event) => {
+  // Suppress GoDaddy cookie banner errors
+  if (event.filename?.includes('script.js') && event.message?.includes('style')) {
+    event.preventDefault();
+    console.warn('Suppressed third-party script error');
+    return false;
+  }
+  
   trackEvent('javascript_error', {
     error_message: event.message,
     error_source: event.filename,
     error_lineno: event.lineno
   });
+});
+
+// Suppress third-party unhandled promise rejections
+window.addEventListener('unhandledrejection', (event) => {
+  if (event.reason?.message?.includes('style') || 
+      event.reason?.toString?.().includes('style')) {
+    event.preventDefault();
+    console.warn('Suppressed third-party promise rejection');
+  }
 });
 
 // === PUBLIC API ===
