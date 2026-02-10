@@ -92,6 +92,7 @@ function initializeParallax() {
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     parallaxElements.forEach(element => {
+      if (!element || !element.style) return;
       const speed = parseFloat(element.dataset.parallax) || 0.5;
       element.style.transform = `translateY(${-(scrolled * speed)}px)`;
     });
@@ -125,11 +126,15 @@ function addTiltEffect(cards) {
 // === PAGE LOAD FADE-IN ===
 window.addEventListener('load', () => {
   const body = document.body;
+  if (!body) return;
+  
   body.style.opacity = '0';
   body.style.transition = 'opacity 0.3s ease-in';
   
   setTimeout(() => {
-    body.style.opacity = '1';
+    if (body) {
+      body.style.opacity = '1';
+    }
   }, 100);
 });
 

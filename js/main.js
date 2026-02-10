@@ -9,15 +9,16 @@ const navbarMenu = document.querySelector('.navbar-menu');
 
 // === HAMBURGER ANIMATION HELPER ===
 function setHamburgerState(isActive) {
+  if (!navbarToggle) return;
   const spans = navbarToggle.querySelectorAll('span');
   if (isActive) {
-    spans[0].style.transform = 'rotate(45deg) translateY(8px)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+    spans[0]?.style && (spans[0].style.transform = 'rotate(45deg) translateY(8px)');
+    spans[1]?.style && (spans[1].style.opacity = '0');
+    spans[2]?.style && (spans[2].style.transform = 'rotate(-45deg) translateY(-8px)');
   } else {
-    spans[0].style.transform = 'none';
-    spans[1].style.opacity = '1';
-    spans[2].style.transform = 'none';
+    spans[0]?.style && (spans[0].style.transform = 'none');
+    spans[1]?.style && (spans[1].style.opacity = '1');
+    spans[2]?.style && (spans[2].style.transform = 'none');
   }
 }
 
@@ -94,18 +95,20 @@ if ('IntersectionObserver' in window) {
 }
 
 // === SERVICE CARD EXPAND/COLLAPSE ===
-document.querySelectorAll('.service-card').forEach(card => {
-  const header = card.querySelector('.service-card-header');
-  if (!header) return;
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.service-card').forEach(card => {
+    const header = card.querySelector('.service-card-header');
+    if (!header) return;
 
-  header.addEventListener('click', () => {
-    const wasExpanded = card.classList.contains('expanded');
-    
-    document.querySelectorAll('.service-card.expanded').forEach(other => {
-      if (other !== card) other.classList.remove('expanded');
+    header.addEventListener('click', () => {
+      const wasExpanded = card.classList.contains('expanded');
+      
+      document.querySelectorAll('.service-card.expanded').forEach(other => {
+        if (other !== card) other.classList.remove('expanded');
+      });
+
+      card.classList.toggle('expanded', !wasExpanded);
     });
-
-    card.classList.toggle('expanded', !wasExpanded);
   });
 });
 
