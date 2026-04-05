@@ -14,84 +14,179 @@
   
   <title>Solvix - Professional Business Support Solutions</title>
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/components.css">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#1e3a8a',
+              light: '#3b82f6',
+              dark: '#1e40af',
+            },
+            secondary: {
+              DEFAULT: '#475569',
+              light: '#64748b',
+              dark: '#334155',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'fade-in-up': 'fadeInUp 0.6s ease-out',
+            'fade-in-down': 'fadeInDown 0.6s ease-out',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeInDown: {
+              '0%': { opacity: '0', transform: 'translateY(-30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <style>
+    /* Ripple Effect */
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple 0.6s ease-out;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    /* Navbar transition */
+    .navbar-scrolled {
+      @apply glass shadow-lg;
+    }
+    
+    /* 3D Transform preserve */
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+    
+    /* Button with overflow for ripple */
+    .btn-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
-  <!-- EmailJS SDK for form submissions -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G_XXXXXXXXXXXXX"></script>
-  
 </head>
-<body>
+<body class="bg-white text-gray-800 overflow-x-hidden">
   
   <!-- Navigation -->
-  <nav class="navbar transparent">
-    <div class="container navbar-container">
-      <a href="index.html" class="navbar-logo">Solvix</a>
-      
-      <button class="navbar-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      
-      <ul class="navbar-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="why-solvix.html">Why Solvix</a></li>
-        <li><a href="founder.html">Founder's Message</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a></li>
-      </ul>
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="text-2xl font-extrabold text-white navbar-scrolled:text-gray-900 floating-logo transition-colors duration-300">
+          Solvix
+        </a>
+        
+        <button class="navbar-toggle lg:hidden p-2" aria-label="Toggle navigation">
+          <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
+          <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all"></span>
+          <span class="block w-6 h-0.5 bg-gray-700 transition-all"></span>
+        </button>
+        
+        <ul class="hidden lg:flex items-center gap-8">
+          <li><a href="index.html" class="text-gray-700 font-medium hover:text-primary transition-colors">Home</a></li>
+          <li><a href="about.html" class="text-gray-700 font-medium hover:text-primary transition-colors">About Us</a></li>
+          <li><a href="services.html" class="text-gray-700 font-medium hover:text-primary transition-colors">Services</a></li>
+          <li><a href="why-solvix.html" class="text-gray-700 font-medium hover:text-primary transition-colors">Why Solvix</a></li>
+          <li><a href="founder.html" class="text-gray-700 font-medium hover:text-primary transition-colors">Founder's Message</a></li>
+          <li><a href="careers.html" class="text-gray-700 font-medium hover:text-primary transition-colors">Careers</a></li>
+          <li><a href="contact.html" class="bg-gradient-to-r from-primary to-primary-light text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 btn-ripple">Contact Us</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
   
-  <!-- Hero Section -->
-  <section class="section-hero">
-    <div class="container" style="position: relative; z-index: 1;">
-      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-        <h1 class="animate-fade-in-down" style="color: white; margin-bottom: var(--spacing-6);">
+  <!-- Hero Section with Three.js -->
+  <section class="relative min-h-screen flex items-center bg-gradient-to-br from-primary via-primary-dark to-blue-900 text-white overflow-hidden">
+    <!-- Three.js Container -->
+    <div id="three-hero-container" class="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-60 lg:opacity-80"></div>
+    
+    <!-- Animated Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=&quot;100&quot; height=&quot;100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;2&quot; fill=&quot;white&quot; opacity=&quot;0.3&quot;/></svg>'); background-size: 50px 50px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 lg:px-12 relative z-10 pt-20">
+      <div class="max-w-4xl">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 animate-fade-in-down">
           End-to-End Business Support Solutions
         </h1>
-        <p class="animate-fade-in-up" style="font-size: var(--font-size-xl); color: rgba(255,255,255,0.95); margin-bottom: var(--spacing-8); line-height: var(--line-height-relaxed);">
+        <p class="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed animate-fade-in-up">
           Without Operational Stress. Your trusted partner for workforce, operations, and business support solutions.
         </p>
-        <div class="flex justify-center gap-4 flex-wrap animate-fade-in">
-          <a href="contact.html" class="btn btn-primary btn-lg">Get Started</a>
-          <a href="services.html" class="btn btn-outline btn-lg" style="border-color: white; color: white;">Explore Services</a>
+        <div class="flex flex-wrap gap-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+          <a href="contact.html" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 btn-ripple">Get Started</a>
+          <a href="services.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300 btn-ripple">Explore Services</a>
         </div>
-      </div>
-      
-      <!-- Stats -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 scroll-animate" style="text-align: center;">
-        <div>
-          <div class="counter" data-target="10" data-duration="2000" style="color: white;">0</div>
-          <div class="counter-label" style="color: rgba(255,255,255,0.9);">Years of Excellence</div>
-        </div>
-        <div>
-          <div class="counter" data-target="8" data-duration="2000" style="color: white;">0</div>
-          <div class="counter-label" style="color: rgba(255,255,255,0.9);">Service Categories</div>
-        </div>
-        <div>
-          <div class="counter" data-target="500" data-duration="2500" style="color: white;">0</div>
-          <div class="counter-label" style="color: rgba(255,255,255,0.9);">+ Clients Served</div>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 scroll-reveal">
+          <div class="text-center">
+            <div class="text-5xl md:text-6xl font-extrabold counter-animate" data-target="10" data-duration="2000">0</div>
+            <div class="text-lg text-white/90 mt-2">Years of Excellence</div>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl md:text-6xl font-extrabold counter-animate" data-target="10" data-duration="2000">0</div>
+            <div class="text-lg text-white/90 mt-2">+Service Categories</div>
+          </div>
+          <div class="text-center">
+            <div class="text-5xl md:text-6xl font-extrabold counter-animate" data-target="500" data-duration="2500">0</div>
+            <div class="text-lg text-white/90 mt-2">+ Clients Served</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
   
   <!-- Company Introduction -->
-  <section class="section bg-white">
-    <div class="container">
-      <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="scroll-animate">
-        <h2 class="section-title">Your One-Stop Corporate Partner</h2>
-        <p style="font-size: var(--font-size-lg); color: var(--color-gray-600); line-height: var(--line-height-relaxed);">
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="max-w-4xl mx-auto text-center scroll-reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">Your One-Stop Corporate Partner</h2>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
           Solvix is a multi-service business solutions firm dedicated to empowering organizations with comprehensive support across workforce management, operations, and specialized business functions. From Agra to Delhi NCR, we've grown into a trusted partner for businesses seeking reliable, professional, and scalable solutions.
         </p>
       </div>
@@ -99,127 +194,271 @@
   </section>
   
   <!-- Services Overview -->
-  <section class="section bg-light">
-    <div class="container">
-      <h2 class="section-title scroll-animate">Our Services</h2>
-      <p class="section-subtitle scroll-animate">Comprehensive business support tailored to your needs</p>
+  <section class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-6 lg:px-12">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-6 scroll-reveal">Our Services</h2>
+      <p class="text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12 scroll-reveal">Comprehensive business support tailored to your needs</p>
       
-      <div class="feature-grid">
-        <div class="card scroll-animate">
-          <div class="service-card-icon">👥</div>
-          <h3 class="card-title">Human Resources</h3>
-          <p class="card-description">Complete HR solutions including recruitment, payroll, compliance, and employee management.</p>
-          <a href="services.html#hr" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+      <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">👥</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Human Resources</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Complete HR solutions including recruitment, payroll, compliance, and employee management.</p>
+          <a href="services.html#hr" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">💼</div>
-          <h3 class="card-title">Accounting & Finance</h3>
-          <p class="card-description">Professional accounting, bookkeeping, tax planning, and financial advisory services.</p>
-          <a href="services.html#accounting" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">💼</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Accounting & Finance</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Professional accounting, bookkeeping, tax planning, and financial advisory services.</p>
+          <a href="services.html#accounting" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">🤝</div>
-          <h3 class="card-title">Counseling Services</h3>
-          <p class="card-description">Business counseling, strategic planning, and organizational development support.</p>
-          <a href="services.html#counseling" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">🤝</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Counseling Services</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Business counseling, strategic planning, and organizational development support.</p>
+          <a href="services.html#counseling" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">📈</div>
-          <h3 class="card-title">Sales Support</h3>
-          <p class="card-description">Sales team augmentation, lead generation, and customer relationship management.</p>
-          <a href="services.html#sales" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">📈</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Sales Support</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Sales team augmentation, lead generation, and customer relationship management.</p>
+          <a href="services.html#sales" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">📱</div>
-          <h3 class="card-title">Media & Marketing</h3>
-          <p class="card-description">Digital marketing, content creation, social media management, and brand building.</p>
-          <a href="services.html#marketing" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">📱</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Media & Marketing</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Digital marketing, content creation, social media management, and brand building.</p>
+          <a href="services.html#marketing" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">💻</div>
-          <h3 class="card-title">Web Development</h3>
-          <p class="card-description">Custom websites, web applications, e-commerce solutions, and digital platforms.</p>
-          <a href="services.html#webdev" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">💻</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Web Development</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Custom websites, web applications, e-commerce solutions, and digital platforms.</p>
+          <a href="services.html#webdev" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">🎨</div>
-          <h3 class="card-title">Graphic Designing</h3>
-          <p class="card-description">Professional design services for branding, marketing materials, and visual identity.</p>
-          <a href="services.html#design" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">🎨</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Graphic Designing</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Professional design services for branding, marketing materials, and visual identity.</p>
+          <a href="services.html#design" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
         
-        <div class="card scroll-animate">
-          <div class="service-card-icon">⚙️</div>
-          <h3 class="card-title">Allied Operations</h3>
-          <p class="card-description">Administrative support, facility management, and operational excellence services.</p>
-          <a href="services.html#operations" style="color: var(--color-primary); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-4); display: inline-block;">Learn More →</a>
+        <div class="stagger-item premium-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 preserve-3d">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center text-4xl text-white mb-4 transform hover:rotate-6 hover:scale-110 transition-all duration-300">⚙️</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Allied Operations</h3>
+          <p class="text-gray-600 leading-relaxed mb-4">Administrative support, facility management, and operational excellence services.</p>
+          <a href="services.html#operations" class="text-primary font-semibold inline-flex items-center hover:gap-2 transition-all">Learn More →</a>
         </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Our Partners -->
+  <section class="py-16 md:py-24 bg-white border-t border-gray-100">
+    <div class="container mx-auto px-6 lg:px-12">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-6 scroll-reveal">Our Partners</h2>
+      <p class="text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16 scroll-reveal">We collaborate with industry leaders across prime locations</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Concentrix -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/concentrix.webp" alt="Concentrix" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Concentrix&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Concentrix</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
+          </div>
+        </div>
+        
+        <!-- Teleperformance -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 100ms;">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/tp.jpeg" alt="Teleperformance" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Teleperformance&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Teleperformance</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Jaipur</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
+          </div>
+        </div>
+
+        <!-- Tech Mahindra -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 200ms;">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/tech%20mahindra.webp" alt="Tech Mahindra" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Tech+Mahindra&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Tech Mahindra</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
+          </div>
+        </div>
+
+        <!-- Taskus -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 300ms;">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/taskus.webp" alt="Taskus" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Taskus&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Taskus</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
+          </div>
+        </div>
+
+        <!-- EXL Services -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/EXL.webp" alt="EXL Services" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EXL+Services&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">EXL Services</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
+          </div>
+        </div>
+
+        <!-- Infosys -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/INFOSYS.webp" alt="Infosys" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Infosys&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Infosys</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
+          </div>
+        </div>
+
+        <!-- Capgemini -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/CAPGEMINI.webp" alt="Capgemini" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Capgemini&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Capgemini</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
+          </div>
+        </div>
+
+        <!-- Startek -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/STARTEK.webp" alt="Startek" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Startek&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Startek</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
+          </div>
+        </div>
+
+        <!-- Wipro -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/WIPRO.webp" alt="Wipro" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Wipro&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Wipro</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
+          </div>
+        </div>
+
+        <!-- WNS -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/WNS.webp" alt="WNS" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=WNS&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">WNS</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
+          </div>
+        </div>
+
+        <!-- Transcom -->
+        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
+          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
+            <img src="css/images/TRANSCOM.webp" alt="Transcom" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Transcom&background=1e3a8a&color=fff&size=128&font-size=0.33';">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Transcom</h3>
+          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
+            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
   
   <!-- Why Solvix -->
-  <section class="section bg-white">
-    <div class="container">
-      <h2 class="section-title scroll-animate">Why Choose Solvix</h2>
-      <p class="section-subtitle scroll-animate">We deliver more than services—we deliver peace of mind</p>
+  <section class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-6 lg:px-12">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-6 scroll-reveal">Why Choose Solvix</h2>
+      <p class="text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-12 scroll-reveal">We deliver more than services—we deliver peace of mind</p>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-        <div class="scroll-animate" style="background-color: var(--color-gray-50); padding: var(--spacing-8); border-radius: var(--radius-xl); border-left: 4px solid var(--color-primary);">
-          <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-4); font-size: var(--font-size-2xl);">✓ No Payroll Responsibility</h3>
-          <p style="color: var(--color-gray-600); line-height: var(--line-height-relaxed);">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div class="scroll-reveal bg-gray-50 p-8 rounded-2xl border-l-4 border-primary hover:shadow-xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-primary mb-4">✓ No Payroll Responsibility</h3>
+          <p class="text-gray-600 leading-relaxed">
             We handle all payroll complexities, compliance, and statutory requirements. Focus on your core business while we manage the administrative burden.
           </p>
         </div>
         
-        <div class="scroll-animate" style="background-color: var(--color-gray-50); padding: var(--spacing-8); border-radius: var(--radius-xl); border-left: 4px solid var(--color-primary);">
-          <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-4); font-size: var(--font-size-2xl);">✓ No Attendance Pressure</h3>
-          <p style="color: var(--color-gray-600); line-height: var(--line-height-relaxed);">
+        <div class="scroll-reveal bg-gray-50 p-8 rounded-2xl border-l-4 border-primary hover:shadow-xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-primary mb-4">✓ No Attendance Pressure</h3>
+          <p class="text-gray-600 leading-relaxed">
             Assured continuity with our backup systems. We ensure your operations never stop, regardless of individual absences.
           </p>
         </div>
         
-        <div class="scroll-animate" style="background-color: var(--color-gray-50); padding: var(--spacing-8); border-radius: var(--radius-xl); border-left: 4px solid var(--color-primary);">
-          <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-4); font-size: var(--font-size-2xl);">✓ Assured Continuity</h3>
-          <p style="color: var(--color-gray-600); line-height: var(--line-height-relaxed);">
+        <div class="scroll-reveal bg-gray-50 p-8 rounded-2xl border-l-4 border-primary hover:shadow-xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-primary mb-4">✓ Assured Continuity</h3>
+          <p class="text-gray-600 leading-relaxed">
             Our structured processes and dedicated teams guarantee uninterrupted service delivery and consistent quality.
           </p>
         </div>
         
-        <div class="scroll-animate" style="background-color: var(--color-gray-50); padding: var(--spacing-8); border-radius: var(--radius-xl); border-left: 4px solid var(--color-primary);">
-          <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-4); font-size: var(--font-size-2xl);">✓ Reduced Attrition Risk</h3>
-          <p style="color: var(--color-gray-600); line-height: var(--line-height-relaxed);">
+        <div class="scroll-reveal bg-gray-50 p-8 rounded-2xl border-l-4 border-primary hover:shadow-xl transition-all duration-300">
+          <h3 class="text-2xl font-bold text-primary mb-4">✓ Reduced Attrition Risk</h3>
+          <p class="text-gray-600 leading-relaxed">
             Eliminate recruitment cycles and training costs. We maintain a stable, experienced workforce dedicated to your success.
           </p>
         </div>
       </div>
       
-      <div style="text-align: center; margin-top: var(--spacing-12);" class="scroll-animate">
-        <a href="why-solvix.html" class="btn btn-primary btn-lg">Discover Our Accountability Model</a>
+      <div class="text-center mt-12 scroll-reveal">
+        <a href="why-solvix.html" class="bg-gradient-to-r from-primary to-primary-light text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 inline-block btn-ripple">Discover Our Accountability Model</a>
       </div>
     </div>
   </section>
   
   <!-- Mission & Vision -->
-  <section class="section bg-light">
-    <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="scroll-animate" style="background: var(--color-primary-gradient); color: white; padding: var(--spacing-10); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl);">
-          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--spacing-6); color: white;">Our Mission</h3>
-          <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: rgba(255,255,255,0.95);">
+  <section class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div class="scroll-reveal bg-gradient-to-br from-primary to-primary-dark text-white p-10 rounded-3xl shadow-2xl">
+          <h3 class="text-3xl md:text-4xl font-extrabold mb-6">Our Mission</h3>
+          <p class="text-lg leading-relaxed text-white/95">
             To empower businesses with reliable, professional, and scalable support solutions that enable them to focus on growth while we handle operational excellence.
           </p>
         </div>
         
-        <div class="scroll-animate" style="background-color: white; padding: var(--spacing-10); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); border: 2px solid var(--color-primary);">
-          <h3 style="font-size: var(--font-size-3xl); margin-bottom: var(--spacing-6); color: var(--color-primary);">Our Vision</h3>
-          <p style="font-size: var(--font-size-lg); line-height: var(--line-height-relaxed); color: var(--color-gray-700);">
+        <div class="scroll-reveal bg-white p-10 rounded-3xl shadow-2xl border-2 border-primary">
+          <h3 class="text-3xl md:text-4xl font-extrabold text-primary mb-6">Our Vision</h3>
+          <p class="text-lg leading-relaxed text-gray-700">
             To be the most trusted business support partner across India, known for our commitment to quality, reliability, and client success.
           </p>
         </div>
@@ -228,89 +467,95 @@
   </section>
   
   <!-- Founder Highlight -->
-  <section class="section bg-white">
-    <div class="container">
-      <div class="scroll-animate" style="max-width: 900px; margin: 0 auto; text-align: center; background-color: var(--color-gray-50); padding: var(--spacing-12); border-radius: var(--radius-2xl);">
-        <div style="width: 120px; height: 120px; border-radius: 50%; background: var(--color-primary-gradient); margin: 0 auto var(--spacing-6); display: flex; align-items: center; justify-content: center; font-size: 48px; color: white; box-shadow: var(--shadow-xl);">
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="scroll-reveal max-w-4xl mx-auto text-center bg-gray-50 p-12 rounded-3xl">
+        <div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-primary-light mx-auto mb-6 flex items-center justify-center text-6xl text-white shadow-2xl transform hover:scale-110 transition-all duration-300">
           👤
         </div>
-        <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--spacing-4);">A Message from Our Founder</h2>
-        <p style="font-size: var(--font-size-lg); color: var(--color-gray-600); line-height: var(--line-height-relaxed); margin-bottom: var(--spacing-6); font-style: italic;">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">A Message from Our Founder</h2>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-6 italic">
           "At Solvix, we believe that every business deserves access to professional support services that drive growth and operational excellence. Our journey from Agra to Delhi NCR has been guided by one principle: unwavering commitment to our clients' success."
         </p>
-        <a href="founder.html" class="btn btn-outline">Read Full Message</a>
+        <a href="founder.html" class="border-2 border-primary text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300 inline-block">Read Full Message</a>
       </div>
     </div>
   </section>
   
   <!-- CTA Section -->
-  <section class="section" style="background: var(--color-primary-gradient); color: white;">
-    <div class="container">
-      <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="scroll-animate">
-        <h2 style="font-size: var(--font-size-4xl); color: white; margin-bottom: var(--spacing-6);">
+  <section class="py-16 md:py-24 bg-gradient-to-br from-primary via-primary-dark to-blue-900 text-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="max-w-4xl mx-auto text-center scroll-reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
           Ready to Transform Your Business Operations?
         </h2>
-        <p style="font-size: var(--font-size-xl); color: rgba(255,255,255,0.95); margin-bottom: var(--spacing-8); line-height: var(--line-height-relaxed);">
+        <p class="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed">
           Let's discuss how Solvix can support your growth journey. Our team is ready to understand your needs and provide tailored solutions.
         </p>
-        <div class="flex justify-center gap-4 flex-wrap">
-          <a href="contact.html" class="btn btn-lg" style="background-color: white; color: var(--color-primary);">Talk to Our Team</a>
-          <a href="tel:+911234567890" class="btn btn-lg btn-outline" style="border-color: white; color: white;">📞 Call Now</a>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="contact.html" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 btn-ripple">Talk to Our Team</a>
+          <a href="tel:+911234567890" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300 btn-ripple">📞 Call Now</a>
         </div>
       </div>
     </div>
   </section>
   
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-section">
-          <h4>Solvix</h4>
-          <p>Your trusted partner for end-to-end business support solutions. Empowering businesses across India with professional services.</p>
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-white text-lg font-bold mb-4">Solvix</h4>
+          <p class="leading-relaxed">Your trusted partner for end-to-end business support solutions. Empowering businesses across India with professional services.</p>
         </div>
         
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="why-solvix.html">Why Solvix</a></li>
+        <div>
+          <h4 class="text-white text-lg font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="why-solvix.html" class="hover:text-white transition-colors">Why Solvix</a></li>
           </ul>
         </div>
         
-        <div class="footer-section">
-          <h4>Services</h4>
-          <ul class="footer-links">
-            <li><a href="services.html#hr">Human Resources</a></li>
-            <li><a href="services.html#accounting">Accounting & Finance</a></li>
-            <li><a href="services.html#marketing">Media & Marketing</a></li>
-            <li><a href="services.html#webdev">Web Development</a></li>
+        <div>
+          <h4 class="text-white text-lg font-bold mb-4">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="services.html#hr" class="hover:text-white transition-colors">Human Resources</a></li>
+            <li><a href="services.html#accounting" class="hover:text-white transition-colors">Accounting & Finance</a></li>
+            <li><a href="services.html#marketing" class="hover:text-white transition-colors">Media & Marketing</a></li>
+            <li><a href="services.html#webdev" class="hover:text-white transition-colors">Web Development</a></li>
           </ul>
         </div>
         
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <ul class="footer-links">
-            <li>📧 info@wesolvix.in</li>
+        <div>
+          <h4 class="text-white text-lg font-bold mb-4">Contact</h4>
+          <ul class="space-y-3">
+            <li>📧 info@solvix.com</li>
             <li>📞 +91 123 456 7890</li>
             <li>📍 Agra & Delhi NCR</li>
-            <li><a href="contact.html">Contact Form</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact Form</a></li>
           </ul>
         </div>
       </div>
       
-      <div class="footer-bottom">
+      <div class="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
         <p>&copy; 2026 Solvix. All rights reserved. | Professional Business Support Solutions</p>
       </div>
     </div>
   </footer>
   
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
   <!-- Scripts -->
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
-  <script src="config/analytics-config.js"></script>
-  <script src="js/forms.js"></script>
+  <script src="js/three-hero.js"></script>
 </body>
 </html>

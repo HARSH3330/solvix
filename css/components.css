@@ -18,6 +18,10 @@
   background-color: transparent;
 }
 
+.navbar.transparent .navbar-logo {
+  color: var(--color-white);
+}
+
 .navbar.scrolled {
   background-color: rgba(255, 255, 255, 0.98);
   box-shadow: var(--shadow-md);
@@ -33,7 +37,7 @@
 .navbar-logo {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-primary);
+  color: #000000;
   text-decoration: none;
   transition: color var(--transition-base);
 }
