@@ -160,23 +160,25 @@ function initCounterAnimations() {
     const target = parseInt(counter.getAttribute('data-target') || counter.textContent);
     const duration = parseInt(counter.getAttribute('data-duration')) || 2000;
     
+    // Create a proxy object to animate since animating textContent directly can be unreliable
+    const countObj = { value: 0 };
+    
     ScrollTrigger.create({
       trigger: counter,
-      start: 'top 80%',
+      start: 'top 90%', // Trigger slightly earlier
       once: true,
       onEnter: () => {
-        gsap.fromTo(counter,
-          { textContent: 0 },
-          {
-            textContent: target,
-            duration: duration / 1000,
-            ease: 'power2.out',
-            snap: { textContent: 1 },
-            onUpdate: function() {
-              counter.textContent = Math.ceil(counter.textContent);
-            }
+        gsap.to(countObj, {
+          value: target,
+          duration: duration / 1000,
+          ease: 'power2.out',
+          onUpdate: function() {
+            counter.textContent = Math.ceil(countObj.value);
+          },
+          onComplete: function() {
+            counter.textContent = target; // Ensure exact final value
           }
-        );
+        });
       }
     });
   });

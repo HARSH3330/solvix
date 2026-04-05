@@ -260,145 +260,174 @@
   </section>
   
   <!-- Our Partners -->
-  <section class="py-16 md:py-24 bg-white border-t border-gray-100">
+  <section class="py-16 md:py-24 bg-white border-t border-gray-100 overflow-hidden">
+    <style>
+      /* ── Partners marquee ── */
+      .partners-track {
+        display: flex;
+        width: max-content;
+        animation: partnerScroll 28s linear infinite;
+      }
+      .partners-track:hover { animation-play-state: paused; }
+
+      @keyframes partnerScroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .partner-logo-item {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px;
+        height: 100px;
+        margin: 0 24px;
+        padding: 16px 20px;
+        background: #f8fafc;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      .partner-logo-item::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(30,58,138,0.06), rgba(59,130,246,0.06));
+        opacity: 0;
+        transition: opacity 0.35s;
+        border-radius: 16px;
+      }
+      .partner-logo-item:hover {
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(30,58,138,0.15);
+        border-color: rgba(30,58,138,0.3);
+        background: #fff;
+        animation-play-state: paused;
+      }
+      .partner-logo-item:hover::before { opacity: 1; }
+
+      .partner-logo-item img {
+        max-width: 100%;
+        max-height: 62px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        filter: grayscale(60%) opacity(0.75);
+        transition: filter 0.35s;
+      }
+      .partner-logo-item:hover img {
+        filter: grayscale(0%) opacity(1);
+      }
+
+      /* Side fade masks */
+      .partners-mask {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+      }
+    </style>
+
     <div class="container mx-auto px-6 lg:px-12">
-      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-6 scroll-reveal">Our Partners</h2>
-      <p class="text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16 scroll-reveal">We collaborate with industry leaders across prime locations</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Concentrix -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/concentrix.webp" alt="Concentrix" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Concentrix&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Concentrix</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
-          </div>
-        </div>
-        
-        <!-- Teleperformance -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 100ms;">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/tp.jpeg" alt="Teleperformance" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Teleperformance&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Teleperformance</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Jaipur</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
-          </div>
-        </div>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 text-center mb-4 scroll-reveal">Our Partners</h2>
+      <p class="text-lg md:text-xl text-gray-600 text-center max-w-3xl mx-auto mb-14 scroll-reveal">Trusted by India's leading industry names</p>
+    </div>
 
-        <!-- Tech Mahindra -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 200ms;">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/tech%20mahindra.webp" alt="Tech Mahindra" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Tech+Mahindra&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Tech Mahindra</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
-          </div>
+    <!-- Marquee wrapper -->
+    <div class="partners-mask relative py-4">
+      <div class="partners-track" id="partnersTrack">
+        <!-- Set 1 -->
+        <div class="partner-logo-item">
+          <img src="css/images/concentrix.webp" alt="Concentrix"
+               onerror="this.src='https://ui-avatars.com/api/?name=Concentrix&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Taskus -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center" style="transition-delay: 300ms;">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/taskus.webp" alt="Taskus" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Taskus&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Taskus</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Chandigarh</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/tp.jpeg" alt="Teleperformance"
+               onerror="this.src='https://ui-avatars.com/api/?name=Teleperformance&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- EXL Services -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/EXL.webp" alt="EXL Services" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=EXL+Services&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">EXL Services</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Delhi - NCR</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/tech%20mahindra.webp" alt="Tech Mahindra"
+               onerror="this.src='https://ui-avatars.com/api/?name=Tech+Mahindra&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Infosys -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/INFOSYS.webp" alt="Infosys" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Infosys&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Infosys</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/taskus.webp" alt="Taskus"
+               onerror="this.src='https://ui-avatars.com/api/?name=Taskus&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Capgemini -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/CAPGEMINI.webp" alt="Capgemini" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Capgemini&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Capgemini</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/EXL.webp" alt="EXL Services"
+               onerror="this.src='https://ui-avatars.com/api/?name=EXL&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Startek -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/STARTEK.webp" alt="Startek" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Startek&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Startek</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Bengaluru</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/INFOSYS.webp" alt="Infosys"
+               onerror="this.src='https://ui-avatars.com/api/?name=Infosys&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Wipro -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/WIPRO.webp" alt="Wipro" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Wipro&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Wipro</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Hyderabad</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/CAPGEMINI.webp" alt="Capgemini"
+               onerror="this.src='https://ui-avatars.com/api/?name=Capgemini&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- WNS -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/WNS.webp" alt="WNS" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=WNS&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">WNS</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/STARTEK.webp" alt="Startek"
+               onerror="this.src='https://ui-avatars.com/api/?name=Startek&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
-        <!-- Transcom -->
-        <div class="scroll-reveal bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group flex flex-col items-center text-center">
-          <div class="w-24 h-24 bg-white rounded-2xl shadow-md mb-6 flex items-center justify-center overflow-hidden p-4 group-hover:shadow-lg transition-all">
-            <img src="css/images/TRANSCOM.webp" alt="Transcom" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Transcom&background=1e3a8a&color=fff&size=128&font-size=0.33';">
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">Transcom</h3>
-          <div class="flex flex-wrap justify-center gap-2 mt-auto w-full">
-            <span class="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-semibold rounded-lg shadow-sm w-full">Pune</span>
-          </div>
+        <div class="partner-logo-item">
+          <img src="css/images/WIPRO.webp" alt="Wipro"
+               onerror="this.src='https://ui-avatars.com/api/?name=Wipro&background=1e3a8a&color=fff&size=128&font-size=0.33'">
         </div>
-
+        <div class="partner-logo-item">
+          <img src="css/images/WNS.webp" alt="WNS"
+               onerror="this.src='https://ui-avatars.com/api/?name=WNS&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/TRANSCOM.webp" alt="Transcom"
+               onerror="this.src='https://ui-avatars.com/api/?name=Transcom&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <!-- Set 2 — duplicate for seamless loop -->
+        <div class="partner-logo-item">
+          <img src="css/images/concentrix.webp" alt="Concentrix"
+               onerror="this.src='https://ui-avatars.com/api/?name=Concentrix&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/tp.jpeg" alt="Teleperformance"
+               onerror="this.src='https://ui-avatars.com/api/?name=Teleperformance&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/tech%20mahindra.webp" alt="Tech Mahindra"
+               onerror="this.src='https://ui-avatars.com/api/?name=Tech+Mahindra&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/taskus.webp" alt="Taskus"
+               onerror="this.src='https://ui-avatars.com/api/?name=Taskus&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/EXL.webp" alt="EXL Services"
+               onerror="this.src='https://ui-avatars.com/api/?name=EXL&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/INFOSYS.webp" alt="Infosys"
+               onerror="this.src='https://ui-avatars.com/api/?name=Infosys&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/CAPGEMINI.webp" alt="Capgemini"
+               onerror="this.src='https://ui-avatars.com/api/?name=Capgemini&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/STARTEK.webp" alt="Startek"
+               onerror="this.src='https://ui-avatars.com/api/?name=Startek&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/WIPRO.webp" alt="Wipro"
+               onerror="this.src='https://ui-avatars.com/api/?name=Wipro&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/WNS.webp" alt="WNS"
+               onerror="this.src='https://ui-avatars.com/api/?name=WNS&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
+        <div class="partner-logo-item">
+          <img src="css/images/TRANSCOM.webp" alt="Transcom"
+               onerror="this.src='https://ui-avatars.com/api/?name=Transcom&background=1e3a8a&color=fff&size=128&font-size=0.33'">
+        </div>
       </div>
     </div>
   </section>
